@@ -1,12 +1,29 @@
-# React + Vite
+# Habit Tracker Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the Habit Tracker App.  
+It provides the user interface to sign up, track, and build new habits over time.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- [Vite](https://vitejs.dev/) (React or other framework, depending on your setup)
+- [npm](https://www.npmjs.com/) for package management
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Installation
+1. Navigate into the frontend folder:
+   ```bash
+   cd frontend
+
+2. Install dependencies:
+    ```bash
+    npm install
+
+3. Start the development server:
+    ```bash
+    npm run dev
+
+4. Open the provided local URL in your browser to see the app.
