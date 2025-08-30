@@ -13,14 +13,6 @@ The project is split into two parts: a **frontend** and a **backend**, each with
 
 ---
 
-## Project Structure
-
-├── frontend/ # React (or other) client app
-├── backend/ # API server with database logic
-└── README.md # This file
-
----
-
 ## Getting Started
 
 ### Prerequisites
@@ -35,6 +27,4 @@ The project is split into two parts: a **frontend** and a **backend**, each with
    cd Habit-Tracker-App
 
 2. Install dependencies for both frontend and backend:
-    ```bash
-    cd frontend && npm install
-    cd ../backend && npm install
+   --> See README in frontend and backend
