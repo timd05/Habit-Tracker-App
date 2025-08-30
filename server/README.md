@@ -29,6 +29,7 @@ It provides the API and database logic to handle user authentication, habit crea
     npm install
 
 3. Create a .env file:
+    ``ènv
     PORT=3000
     MONGO_URI=mongodb://127.0.0.1:27017/habit-tracker
 
