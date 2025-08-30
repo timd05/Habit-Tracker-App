@@ -1,0 +1,10 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px black;
+    border-radius: 1rem;
+}
+
+.btn {
+    margin: 1rem;
+}

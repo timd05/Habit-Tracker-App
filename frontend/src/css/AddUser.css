@@ -1,0 +1,189 @@
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+ 
+#bottone5 {
+    position: absolute;
+    top: 2rem;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+#bottone5:hover,
+#bottone5:focus {
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+ color: rgba(0, 0, 0, 0.65);
+}
+
+#bottone5:hover {
+ transform: translateY(-1px);
+}
+
+#bottone5:active {
+ background-color: #F0F0F1;
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+ color: rgba(0, 0, 0, 0.65);
+ transform: translateY(0);
+}
+
+
+.login-container {
+    width: 20%;
+    height: 45%;
+    border-radius: 1rem;
+    background-color: transparent;
+    backdrop-filter: blur(60px);
+    padding: 1rem 2rem;
+    
+    box-shadow: 0px 0px 35px 1px rgb(60, 93, 157);
+    transition: all 0.3s linear;
+}
+
+.login-container:hover {
+    transform: scale(1.05);
+}
+
+.login-title {
+    text-align: center;
+    text-shadow: 2px 2px #dcdcdc;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin: 1rem 0;
+    height: 2rem;
+    border: none;
+    border: 2px solid transparent;
+    border-bottom: solid 2px black;
+    transition: all 0.3s linear;
+    padding: 0.25rem;
+}
+
+.user-input {
+    background: none;
+    background: url('/user.png');
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: right 0.5rem center;
+}
+
+.pwd-input {
+    background: none;
+    background: url('/pwd.png');
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: right 0.5rem center;
+}
+
+.mail-input {
+    background: none;
+    background: url('/mail.png');
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: right 0.5rem center;
+}
+
+input:focus {
+    outline: none;
+    border-radius: 0.5rem;
+    border: 2px solid black;
+}
+
+input::placeholder {
+    color: black;
+}
+
+.login-btn {
+    margin: 1rem 0;
+    height: 2.5rem;
+    background-color: black;
+    color:white;
+    font-weight: bolder;
+    font-size: 1rem;
+    border:none;
+    border-radius: 0.5rem;
+    transition: all 0.3s linear;
+}
+
+.login-btn:hover {
+    background-color: rgb(44, 44, 44);
+    border: solid 2px rgb(0, 0, 0);
+    transition: all 0.3ms;
+}
+
+.error-message {
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  
+  padding: 1rem 2rem;
+  border: 2px solid black;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}

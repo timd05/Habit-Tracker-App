@@ -1,0 +1,190 @@
+.home_background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(22, 25, 43); 
+}
+
+#bottone4 {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    align-items: center;
+    background-color: #2f2f2f;
+    border: 1px solid rgba(255, 252, 252, 0.329);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+#bottone4:hover,
+#bottone4:focus {
+ border-color: rgba(255, 253, 253, 0.614);
+ box-shadow: rgba(122, 229, 251, 0.394) 0 4px 12px;
+}
+
+#bottone4:hover {
+ transform: translateY(-1px);
+}
+
+#bottone4:active {
+ background-color: #45d7ff;
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+ color: rgba(0, 0, 0, 0.65);
+ transform: translateY(0);
+}
+
+.view-title {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    margin-top: 1rem;
+    color: #0b8eb3 !important;
+    visibility: hidden;
+    background-color: rgb(22, 25, 43) !important;
+    font-size: 3rem;
+}
+
+#bottone3 {
+    align-items: center;
+    background-color: #2f2f2f;
+    border: 1px solid rgba(255, 252, 252, 0.329);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+    height: 3.5rem !important;
+}
+
+#bottone3:hover,
+#bottone3:focus {
+ border-color: rgba(255, 253, 253, 0.614);
+ box-shadow: rgba(122, 229, 251, 0.394) 0 4px 12px;
+}
+
+#bottone3:hover {
+ transform: translateY(-1px);
+}
+
+#bottone3:active {
+ background-color: #45d7ff;
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+ color: rgba(0, 0, 0, 0.65);
+ transform: translateY(0);
+}
+
+.add-container {
+    display: flex;
+    align-items: center;
+    margin: 1rem 10%;
+    gap: 1rem;
+    width: 94%;
+}
+
+.add-Form {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.welcome-text {
+    color: #45d7ff;
+}
+
+#bottone3.add-btn {
+    background-color: #0b8eb3 !important;
+    color: black !important;
+    font-size: 1.5rem !important;
+}
+
+.habit-input {
+    color:#9b9d9d !important;
+    background-color: rgb(9, 10, 16) !important;
+    border: solid 1.5px rgb(255, 253, 253, 0.614) !important;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    width: 90%;
+    padding: 0.5rem !important;
+    font-size: 1.25rem !important;
+}
+
+.habit-input::placeholder {
+    color:#9b9d9d !important;
+    font-size: 1.25rem;
+}
+
+.mainHabit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7rem;
+    background-color: rgb(9, 10, 16);
+    border-radius: 0.5rem;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.view-container {
+    display: flex;
+    padding: 0.25rem;
+    background-color: #52525f;
+    border-radius: 0.5rem;
+    width: 94%;
+    height: 3rem;
+    justify-content: space-evenly;
+}
+
+.view-btn {
+    width: 33.3%;
+    background-color: #52525f;
+    border: none;
+    color: #9797ae;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+}
+
+.selected {
+    background-color: black;
+    color: white;
+    border-radius: 0.5rem;
+    visibility: visible;
+}
