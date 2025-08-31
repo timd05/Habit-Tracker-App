@@ -73,8 +73,8 @@
 
 
 .login-container {
-    width: 20%;
-    height: 45%;
+    width: 25%;
+    height: 60%;
     border-radius: 1rem;
     background-color: transparent;
     backdrop-filter: blur(60px);
@@ -91,7 +91,7 @@
 .login-title {
     text-align: center;
     text-shadow: 2px 2px #dcdcdc;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     margin: 0.5rem 0;
     margin-bottom: 1rem;
@@ -104,12 +104,13 @@
 
 .input {
     margin: 1rem 0;
-    height: 2rem;
+    height: 3rem;
     border: none;
     border: 2px solid transparent;
     border-bottom: solid 2px black;
     transition: all 0.3s linear;
     padding: 0.25rem;
+    font-size: 1rem;
 }
 
 .user-input {
@@ -144,15 +145,17 @@ input:focus {
 
 input::placeholder {
     color: black;
+    font-size: 1rem;
 }
 
 .login-btn {
-    margin: 1rem 0;
-    height: 2.5rem;
+    margin: 2rem 0;
+    margin-top: 3rem;
+    height: 3rem;
     background-color: black;
     color:white;
     font-weight: bolder;
-    font-size: 1rem;
+    font-size: 1.25rem;
     border:none;
     border-radius: 0.5rem;
     transition: all 0.3s linear;
