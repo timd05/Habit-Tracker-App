@@ -20,9 +20,9 @@ It provides the API and database logic to handle user authentication, habit crea
   By default, it runs on `mongodb://127.0.0.1:27017`.
 
 ### Installation
-1. Navigate into the backend folder:
+1. Navigate into the server(backend) folder:
    ```bash
-   cd backend
+   cd server
 
 2. Install dependencies:
     ```bash
