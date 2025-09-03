@@ -146,6 +146,10 @@
     font-size: 1.25rem !important;
 }
 
+.habits-list {
+    color: white;
+}
+
 .habit-input::placeholder {
     color:#9b9d9d !important;
     font-size: 1.25rem;
@@ -187,4 +191,37 @@
     color: white;
     border-radius: 0.5rem;
     visibility: visible;
+}
+
+.addHabit-container {
+    position: absolute;
+    top: 25%;
+    left: 12.5%;
+    width: 75%;
+    height: 50%;
+    visibility: hidden;
+}
+
+.add-input-row{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 0;
+}
+.addHabit-form{
+    display : flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.title-container {
+    display:flex;
+    flex-direction: column;
+}
+
+.add-open {
+    visibility: visible !important;
+    background-color: white !important;
+    border-radius: 1rem;
+    z-index: 10 !important;
 }

@@ -12,28 +12,35 @@ const habitSchema = new mongoose.Schema({
         ref: 'User',
         required : true
     },
-    daily : {
-        type: Boolean
-    },
-    weekly : {
-        type: Boolean
-    },
-    monthly : {
-        type: Boolean
+    frequency : {
+        type : String,
+        enum : ['daily', 'weekly', 'calendar'],
+        required : true
     },
     counter : {
-        type: Array
+        type: Boolean
+    },
+    counterValue : {
+        type : Number,
+    },
+    actualCounter : {
+        type : Number,
+        default : 0
+    },
+    streak : {
+        type : Number,
+        default : 0
     },
     description : {
         type: String,
         required: true
     },
-    field : {
-        type : String,
-        required: true
-    },
     days : {
         type : Array
+    },
+    done : {
+        type : Boolean,
+        default : false
     }
 });
 
