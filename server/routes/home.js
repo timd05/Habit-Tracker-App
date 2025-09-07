@@ -14,12 +14,30 @@ router.get('/', async (req,res) => {
     }
 });
 
-router.get('/getDaily', async (req,res) => {
+/* Routes to get habits */
+
+router.get('/gethabit/:id', async (req,res) => {
     if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
+    const habit_id = req.params.id;
+    try{
+        const habit = await Habit.findById(habit_id);
+        if (!habit) return res.status(404).json({ success: false, message: "Habit nicht gefunden"});
+        res.json({ success: true, habit: habit });
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
+router.get('/getDaily/:dayName', async (req,res) => {
+    if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
+    const dayName = req.params.dayName;
     try{
         const user = await User.findById(req.session.userId);
         if (!user) return res.status(401).json({ success: false, message: 'User not found'});
-        const habits = await Habit.find({ user: req.session.userId, frequency: "daily" });
+        const habits = await Habit.find({ user: req.session.userId, $or: [
+            { frequency: "daily" },
+            { frequency: "weekly", days: dayName }
+        ] });
         res.json({ success: true, habits: habits})
     }catch(err){
         res.status(500).json({ success: false, message: err.message});
@@ -37,6 +55,20 @@ router.get('/getWeekly', async (req,res) => {
         res.status(500).json({ success: false, message: err.message});
     }
 });
+
+router.get('/getAllHabits', async (req,res) => {
+    if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
+    try{
+        const user = await User.findById(req.session.userId);
+        if (!user) return res.status(401).json({ success: false, message: 'User not found'});
+        const habits = await Habit.find({ user: req.session.userId});
+        res.json({ success: true, habits: habits})
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
+/* Routes for setting the view */
 
 const daily = "daily";
 const weekly = "weekly";
@@ -66,6 +98,8 @@ router.get('/getView', (req,res) => {
     }
 })
 
+/* Route for logging out */
+
 router.get('/logout', (req,res) => {
     if (!req.session) {
         res.clearCookie('connect.sid', {
@@ -90,6 +124,8 @@ router.get('/logout', (req,res) => {
     });
 });
 
+/* Routes for adding, editing and deleting a habit */
+
 router.post('/addhabit', async (req,res) => {
     try {
         const { habitName, habitFrequency, habitDescription, counterForHabit, counterValue, actualCounter, streak, selectedDays, done } = req.body;
@@ -108,21 +144,21 @@ router.post('/addhabit', async (req,res) => {
 
 router.put('/edithabit', async (req,res) => {
     try {
-        const { editingHabitId, habitName, habitFrequency, habitDescription, counterForHabit, counterValue, actualCounter, selectedDays, streak, done } = req.body;
+        const { id, habitName, habitFrequency, habitDescription, counterForHabit, counterValue, actualCounter, selectedDays, streak, done } = req.body;
         if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
         const userId = req.session.userId;
         if (!userId) return res.status(401).json({ success: false, message: 'User not found'});
-        const habit = await Habit.findById(editingHabitId);
+        const habit = await Habit.findById(id);
         if (!habit) return res.status(404).json({ success: false, message: 'Habit not found'});
-        habit.name = habitName;
-        habit.frequency = habitFrequency;
-        habit.description = habitDescription;
-        habit.counter = counterForHabit;
-        habit.counterValue = counterValue;
-        habit.actualCounter = actualCounter;
-        habit.days = selectedDays;
-        habit.streak = streak;
-        habit.done = done;
+        habit.name = habitName || habit.name;
+        habit.frequency = habitFrequency || habit.frequency;
+        habit.description = habitDescription || habit.description;
+        habit.counter = counterForHabit !== undefined ? counterForHabit : habit.counter;
+        habit.counterValue = counterValue || habit.counterValue;
+        habit.actualCounter = actualCounter || habit.actualCounter;
+        habit.days = selectedDays.length ? selectedDays : habit.days;
+        habit.streak = streak || habit.streak;
+        habit.done = done !== undefined ? done : habit.done;
         await habit.save();
         res.json({ success: true, message: 'Habit erfolgreich editiert', habit });
         console.log('Habit editiert:', habit);
@@ -132,14 +168,77 @@ router.put('/edithabit', async (req,res) => {
     }
 });
 
-router.delete('/deletehabit', async (req,res) => {
-    const { id } = req.body;
+router.delete('/deletehabit/:id', async (req,res) => {
+    const id = req.params.id;
     if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
     try{
         const user = await User.findById(req.session.userId);
         if (!user) return res.status(401).json({ success: false, message: 'User not found'});
         await Habit.findByIdAndDelete(id);
         res.json({ success: true, message: 'Habit erfolgreich gelöscht' });
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
+/* Routes for checking and unchecking habits  */
+
+router.get('/checkhabit/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
+    try{
+        const user = await User.findById(req.session.userId);
+        if (!user) return res.status(401).json({ success: false, message: 'User not found'});
+        const habit = await Habit.findById(id);
+        if (!habit) return res.status(404).json({ success: false, message: 'Habit not found'});
+        habit.done = !habit.done;
+        await habit.save();
+        res.json({ success: true, message: 'Habit erfolgreich aktualisiert', habit });
+        console.log(`habit_done: ${habit.done}`);
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
+/* Routes for habits with counters */
+
+router.get('/incrementCounter/:id', async (req,res) => {
+    const id = req.params.id;
+    try{
+        const user = await User.findById(req.session.userId);
+        if (!user) return res.status(401).json({ success: false, message: 'User not found'});
+        const habit = await Habit.findById(id);
+        if (!habit) return res.status(404).json({ success: false, message: 'Habit not found'});
+        if (habit.actualCounter === habit.counterValue) return res.status(400).json({ success: false, message: 'Counter already at maximum value'});
+        habit.actualCounter = habit.actualCounter + 1;
+        if (habit.actualCounter === habit.counterValue) {
+            habit.done = true;
+        }
+        await habit.save();
+        res.json({ success: true, message: 'Habit erfolgreich aktualisiert', habit });
+        console.log(`habit_done: ${habit.actualCounter}`);
+        console.log(`habit_done: ${habit.done}`);
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
+router.get('/decrementCounter/:id', async (req,res) => {
+        const id = req.params.id;
+    try{
+        const user = await User.findById(req.session.userId);
+        if (!user) return res.status(401).json({ success: false, message: 'User not found'});
+        const habit = await Habit.findById(id);
+        if (!habit) return res.status(404).json({ success: false, message: 'Habit not found'});
+        if (habit.actualCounter === 0) return res.status(400).json({ success: false, message: 'Counter already at minimum value'});
+        if (habit.actualCounter === habit.counterValue) {
+            habit.done = false;
+        }
+        habit.actualCounter = habit.actualCounter - 1;
+        await habit.save();
+        res.json({ success: true, message: 'Habit erfolgreich aktualisiert', habit });
+        console.log(`habit_done: ${habit.actualCounter}`);
+        console.log(`habit_done: ${habit.done}`);
     }catch(err){
         res.status(500).json({ success: false, message: err.message});
     }
