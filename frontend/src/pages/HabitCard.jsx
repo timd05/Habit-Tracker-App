@@ -133,7 +133,7 @@ function HabitCard({habit:initialHabit}){
                 <div className="habit-container">
                     <div className="habit-info-container">
                         <div className="first-row-habit">
-                            <div className="counter-container">
+                            <div className="counter-card-container">
                                 <button id="bottone3" className="counter-sub-btn add-btn" onClick={() => {decrementCounter(habit._id)}}></button>
                                 <p className="counter-font">{habit.actualCounter}/{habit.counterValue}</p>
                                 <button id="bottone3" className="counter-add-btn add-btn" onClick={() => {incrementCounter(habit._id)}}></button>

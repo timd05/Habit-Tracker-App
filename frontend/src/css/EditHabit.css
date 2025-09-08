@@ -1,0 +1,136 @@
+.editHabit-container{
+    height: 75%;
+    width: 80%;
+    position: absolute;
+    top: 12.5%;
+    left: 10%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(27, 27, 38);
+    border-radius: 1rem;
+    box-shadow: 0px 0px 35px 1px rgb(60, 93, 157);
+}
+
+.editHabit-form{
+    height: 90%;
+    width: 95%;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 1fr 1fr;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.editHabit-title{
+    font-size: 2.5rem !important;
+}
+
+.title-container{
+    grid-column: 1;
+    grid-row: 1;
+    padding: 1rem;
+}
+
+.frequency-container{
+    grid-column: 2;
+    grid-row: 1;
+    padding: 1rem;
+    font-size: 1.25rem !important;
+}
+
+.weekly-container{
+    font-size: 1.25rem !important;
+}
+
+.description-container{
+    grid-column: 1;
+    grid-row: 2;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.counter-container{
+    grid-column: 2;
+    grid-row: 2;
+    padding: 1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.25rem !important;
+}
+
+.edit-btn{
+    background-color: #0b8eb3 !important;
+    grid-column: 1/3;
+    grid-row: 3;
+    padding: 1rem;
+    margin: 0 25%;
+}
+
+.editHabit-title{
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hiddenWeekly{
+    display: none;
+}
+
+.edit-input-title{
+    font-size: 1.25rem;
+}
+
+.edit-input-field{
+    height: 2rem;
+}
+
+.puffer-div{
+    height: 2rem;
+    width: 1px;
+}
+
+.puffer-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#daily{
+    margin-left: 1rem;
+}
+
+.daily-label{
+    margin-right: 2rem;
+}
+
+.edit-counter-field{
+    height: 2rem;
+    border: none;
+}
+
+.edit-counter-field:focus{
+    outline: none;
+    border: none;
+}
+
+.back-btn{
+    position: absolute;
+    top: 90%;
+    left: 47.5%;
+    width: 5%;
+}
+
+.edit-counter-field{
+    width: 100% !important;
+    margin-right: 0;
+}
+
+.counterForHabit{
+    flex: 1;
+}

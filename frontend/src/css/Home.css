@@ -242,7 +242,7 @@
     height: 0.75rem;
 }
 
-.counter-container {
+.counter-card-container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -347,11 +347,6 @@
 }
 
 .addHabit-container {
-    position: absolute;
-    top: 25%;
-    left: 12.5%;
-    width: 75%;
-    height: 50%;
     visibility: hidden;
 }
 
@@ -362,9 +357,14 @@
     margin: 1rem 0;
 }
 .addHabit-form{
-    display : flex;
-    flex-direction: column;
-    padding: 1rem;
+    height: 90%;
+    width: 95%;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 1fr 1fr;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .title-container {
@@ -377,4 +377,8 @@
     background-color: white !important;
     border-radius: 1rem;
     z-index: 10 !important;
+}
+
+.add-back-btn{
+    margin-bottom: 1rem;
 }

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import '../css/EditHabit.css';
 
 function EditHabit() {
     
@@ -66,55 +67,59 @@ function EditHabit() {
         }
     }
 
+    function handleBackClick(){
+        navigate('/home');
+    }
+
     return (
-        <div className="addHabit-container add-open">
-            <form className="addHabit-form" onSubmit={handleEditHabit}>
-                <div className="add-input-row">
+        <>
+        <div className="editHabit-container">
+            <h2 className="editHabit-title ubuntu-bold">Edit Habit: {habitName}</h2>
+            <form className="editHabit-form ubuntu-regular" onSubmit={handleEditHabit}>
                     <div className="title-container">
-                        <label className="ubuntu-medium">Titel:</label>
-                        <input type="text" className="ubuntu-medium" value={habitName} onChange={(e) => setHabitName(e.target.value)} />
+                        <label className="ubuntu-medium edit-input-title">Titel:</label>
+                        <input type="text" className="ubuntu-medium edit-input-field" value={habitName} onChange={(e) => setHabitName(e.target.value)} />
                     </div>
-                    <div>
-                        <label className='ubuntu-medium'>Frequency:</label>
-                        <div className='frequency-container'>
-                            <input type="radio" id='daily' name='frequency' value='daily' checked={habitFrequency === 'daily'} onChange={(e) => setHabitFrequency(e.target.value)} />
-                            <label htmlFor="daily">Daily</label>
-                            <input type="radio" id='weekly' name='frequency' value='weekly' checked={habitFrequency === 'weekly'} onChange={(e) => setHabitFrequency(e.target.value)} />
-                            <label htmlFor="weekly">Weekly</label>
-                        </div>
-                        {habitFrequency === "weekly" && (
-                            <div className="weekly-container">
-                                {[
-                                { value: "Monday", label: "Mo" },
-                                { value: "Tuesday", label: "Tu" },
-                                { value: "Wednesday", label: "We" },
-                                { value: "Thursday", label: "Th" },
-                                { value: "Friday", label: "Fr" },
-                                { value: "Saturday", label: "Sa" },
-                                { value: "Sunday", label: "Su" },
-                                ].map((day) => (
-                                <label key={day.value} className="ubuntu-medium">
-                                    <input
-                                    type="checkbox"
-                                    value={day.value}
-                                    checked={selectedDays.includes(day.value)}
-                                    onChange={() => toggleDay(day.value)}
-                                    />
-                                    {day.label}
-                                </label>
-                                ))}
+                    <div className="frequency-container">
+                        <label className='ubuntu-medium edit-input-title'>Frequency:</label>
+                        <input type="radio" id='daily' name='frequency' value='daily' checked={habitFrequency === 'daily'} onChange={(e) => setHabitFrequency(e.target.value)} />
+                        <label htmlFor="daily" className="daily-label">Daily</label>
+                        <input type="radio" id='weekly' name='frequency' value='weekly' checked={habitFrequency === 'weekly'} onChange={(e) => setHabitFrequency(e.target.value)} />
+                        <label htmlFor="weekly">Weekly</label>
+                        <div className="puffer-container">
+                            <div className="puffer-div"></div>
+                            <div className={`${habitFrequency === 'weekly' ? '' : 'hiddenWeekly'}`}>
+                                <div className="weekly-container">
+                                    {[
+                                    { value: "Monday", label: "Mo" },
+                                    { value: "Tuesday", label: "Tu" },
+                                    { value: "Wednesday", label: "We" },
+                                    { value: "Thursday", label: "Th" },
+                                    { value: "Friday", label: "Fr" },
+                                    { value: "Saturday", label: "Sa" },
+                                    { value: "Sunday", label: "Su" },
+                                    ].map((day) => (
+                                    <label key={day.value} className="ubuntu-medium">
+                                        <input
+                                        type="checkbox"
+                                        value={day.value}
+                                        checked={selectedDays.includes(day.value)}
+                                        onChange={() => toggleDay(day.value)}
+                                        />
+                                        {day.label}
+                                    </label>
+                                    ))}
+                                </div>
                             </div>
-                            )}
+                            </div>
                     </div>
-                </div>
-                <div className="add-input-row">
                     <div className="description-container">
-                        <input type="text" className="ubuntu-medium" value={habitDescription} onChange={(e) => setHabitDescription(e.target.value)} placeholder="Enter habit description..." />
+                        <label className="ubuntu-medium edit-input-title">Description:</label>
+                        <input type="text" className="ubuntu-medium edit-input-field" value={habitDescription} onChange={(e) => setHabitDescription(e.target.value)} placeholder="Enter habit description..." />
                     </div>
-                </div>
-                <div className="add-input-row">
                     <div className='counter-container'>
-                        <label>Counter:</label>
+                        <div className="counter-subcontainer">
+                        <label className="ubuntu-medium edit-input-title">Counter:</label>
 
                         <input 
                             type='radio' 
@@ -135,12 +140,14 @@ function EditHabit() {
                             onChange={() => setCounterForHabit(false)} 
                         />
                         <label htmlFor='counterNo'>No</label>
-
+                        </div>
+                        <div className="puffer-container">
+                        <div className="puffer-div"></div>
                         {counterForHabit && (
                             <div className="counterForHabit counter-active">
                             <input 
                                 type="number" 
-                                className="ubuntu-medium" 
+                                className="ubuntu-medium edit-counter-field" 
                                 value={counterValue} 
                                 onChange={(e) => setCounterValue(e.target.value)} 
                                 placeholder="Enter counter value..." 
@@ -148,11 +155,12 @@ function EditHabit() {
                             </div>
                         )}
                         </div>
-
-                </div>
-                <button type="submit">Edit Habit</button>
+                        </div>
+                <button id="bottone3" className="edit-btn ubuntu-medium" type="submit">Edit Habit</button>
             </form>
         </div>
+        <button id="bottone3" className="back-btn" onClick={handleBackClick}>Back</button>
+        </>
     )
 }
 

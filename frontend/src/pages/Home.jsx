@@ -256,90 +256,93 @@ function Home(){
                 </div>
             </div>
             <div className={`addHabit-container ${showAddHabitForm === true ? "add-open" : ''}`}>
-                <form className="addHabit-form" onSubmit={handleAddHabit}>
-                    <div className="add-input-row">
+            <div className='editHabit-container'>
+                <h2 className="editHabit-title ubuntu-bold">Add a Habit</h2>
+                <form className="editHabit-form ubuntu-regular" onSubmit={handleAddHabit}>
                         <div className="title-container">
-                            <label className="ubuntu-medium">Titel:</label>
-                            <input type="text" className="ubuntu-medium" value={habitName} onChange={(e) => setHabitName(e.target.value)} />
+                            <label className="ubuntu-medium edit-input-title">Titel:</label>
+                            <input type="text" className="ubuntu-medium edit-input-field" value={habitName} onChange={(e) => setHabitName(e.target.value)} />
                         </div>
-                        <div>
-                            <label className='ubuntu-medium'>Frequency:</label>
-                            <div className='frequency-container'>
-                                <input type="radio" id='daily' name='frequency' value='daily' checked={habitFrequency === 'daily'} onChange={(e) => setHabitFrequency(e.target.value)} />
-                                <label htmlFor="daily">Daily</label>
-                                <input type="radio" id='weekly' name='frequency' value='weekly' checked={habitFrequency === 'weekly'} onChange={(e) => setHabitFrequency(e.target.value)} />
-                                <label htmlFor="weekly">Weekly</label>
-                            </div>
-                            {habitFrequency === "weekly" && (
-                                <div className="weekly-container">
-                                    {[
-                                    { value: "Monday", label: "Mo" },
-                                    { value: "Tuesday", label: "Tu" },
-                                    { value: "Wednesday", label: "We" },
-                                    { value: "Thursday", label: "Th" },
-                                    { value: "Friday", label: "Fr" },
-                                    { value: "Saturday", label: "Sa" },
-                                    { value: "Sunday", label: "Su" },
-                                    ].map((day) => (
-                                    <label key={day.value} className="ubuntu-medium">
-                                        <input
-                                        type="checkbox"
-                                        value={day.value}
-                                        checked={selectedDays.includes(day.value)}
-                                        onChange={() => toggleDay(day.value)}
-                                        />
-                                        {day.label}
-                                    </label>
-                                    ))}
+                        <div className='frequency-container'>
+                            <label className='ubuntu-medium edit-input-title'>Frequency:</label>
+                            <input type="radio" id='daily' name='frequency' value='daily' checked={habitFrequency === 'daily'} onChange={(e) => setHabitFrequency(e.target.value)} />
+                            <label htmlFor="daily">Daily</label>
+                            <input type="radio" id='weekly' name='frequency' value='weekly' checked={habitFrequency === 'weekly'} onChange={(e) => setHabitFrequency(e.target.value)} />
+                            <label htmlFor="weekly">Weekly</label>
+                            <div className='puffer-container'>
+                                <div className='puffer-div'></div>
+                                <div className={`${habitFrequency === 'weekly' ? '' : 'hiddenWeekly'}`}>
+                                    <div className="weekly-container">
+                                        {[
+                                        { value: "Monday", label: "Mo" },
+                                        { value: "Tuesday", label: "Tu" },
+                                        { value: "Wednesday", label: "We" },
+                                        { value: "Thursday", label: "Th" },
+                                        { value: "Friday", label: "Fr" },
+                                        { value: "Saturday", label: "Sa" },
+                                        { value: "Sunday", label: "Su" },
+                                        ].map((day) => (
+                                        <label key={day.value} className="ubuntu-medium">
+                                            <input
+                                            type="checkbox"
+                                            value={day.value}
+                                            checked={selectedDays.includes(day.value)}
+                                            onChange={() => toggleDay(day.value)}
+                                            />
+                                            {day.label}
+                                        </label>
+                                        ))}
+                                    </div>
                                 </div>
-                                )}
+                            </div>
                         </div>
-                    </div>
-                    <div className="add-input-row">
                         <div className="description-container">
-                            <input type="text" className="ubuntu-medium" value={habitDescription} onChange={(e) => setHabitDescription(e.target.value)} placeholder="Enter habit description..." />
+                            <label className="ubuntu-medium edit-input-title">Description:</label>
+                            <input type="text" className="ubuntu-medium edit-input-field" value={habitDescription} onChange={(e) => setHabitDescription(e.target.value)} placeholder="Enter habit description..." />
                         </div>
-                    </div>
-                    <div className="add-input-row">
                         <div className='counter-container'>
-                            <label>Counter:</label>
+                        <div className="counter-subcontainer">
+                        <label className="ubuntu-medium edit-input-title">Counter:</label>
 
+                        <input 
+                            type='radio' 
+                            id='counterYes' 
+                            name='counter' 
+                            value='yes' 
+                            checked={counterForHabit === true}
+                            onChange={() => setCounterForHabit(true)} 
+                        />
+                        <label htmlFor='counterYes'>Yes</label>
+
+                        <input 
+                            type='radio' 
+                            id='counterNo' 
+                            name='counter' 
+                            value='no' 
+                            checked={counterForHabit === false}
+                            onChange={() => setCounterForHabit(false)} 
+                        />
+                        <label htmlFor='counterNo'>No</label>
+                        </div>
+                        <div className="puffer-container">
+                        <div className="puffer-div"></div>
+                        {counterForHabit && (
+                            <div className="counterForHabit counter-active">
                             <input 
-                                type='radio' 
-                                id='counterYes' 
-                                name='counter' 
-                                value='yes' 
-                                checked={counterForHabit === true}
-                                onChange={() => setCounterForHabit(true)} 
+                                type="number" 
+                                className="ubuntu-medium edit-counter-field" 
+                                value={counterValue} 
+                                onChange={(e) => setCounterValue(e.target.value)} 
+                                placeholder="Enter counter value..." 
                             />
-                            <label htmlFor='counterYes'>Yes</label>
-
-                            <input 
-                                type='radio' 
-                                id='counterNo' 
-                                name='counter' 
-                                value='no' 
-                                checked={counterForHabit === false}
-                                onChange={() => setCounterForHabit(false)} 
-                            />
-                            <label htmlFor='counterNo'>No</label>
-
-                            {counterForHabit && (
-                                <div className="counterForHabit counter-active">
-                                <input 
-                                    type="number" 
-                                    className="ubuntu-medium" 
-                                    value={counterValue} 
-                                    onChange={(e) => setCounterValue(e.target.value)} 
-                                    placeholder="Enter counter value..." 
-                                />
-                                </div>
-                            )}
                             </div>
-
-                    </div>
-                    <button type="submit">Add Habit</button>
+                        )}
+                        </div>
+                        </div>
+                    <button id='bottone3' className='edit-btn ubuntu-medium' type="submit">Add Habit</button>
                 </form>
+                <button id="bottone3" className="add-back-btn ubuntu-medium" onClick={showAddHabit}>Back</button>
+            </div>
             </div>
         </>
     )
