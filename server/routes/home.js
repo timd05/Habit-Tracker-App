@@ -181,6 +181,21 @@ router.delete('/deletehabit/:id', async (req,res) => {
     }
 });
 
+router.put('/updateHabits', async (req,res) => {
+    const { habits } = req.body;
+    if (!req.session.userId) return res.status(401).json({ success: false, message: "Nicht eingeloggt"});
+    try{
+        const user = await User.findById(req.session.userId);
+        if (!user) return res.status(401).json({ success: false, message: 'User not found'});
+        for (const habit of habits) {
+            await Habit.findByIdAndUpdate(habit._id, habit, { new: true });
+        }
+        res.json({ success: true, message: 'Habits erfolgreich aktualisiert' });
+    }catch(err){
+        res.status(500).json({ success: false, message: err.message});
+    }
+});
+
 /* Routes for checking and unchecking habits  */
 
 router.get('/checkhabit/:id', async (req, res) => {
@@ -192,6 +207,9 @@ router.get('/checkhabit/:id', async (req, res) => {
         const habit = await Habit.findById(id);
         if (!habit) return res.status(404).json({ success: false, message: 'Habit not found'});
         habit.done = !habit.done;
+        if (habit.done) {
+            habit.date = new Date();
+        }
         await habit.save();
         res.json({ success: true, message: 'Habit erfolgreich aktualisiert', habit });
         console.log(`habit_done: ${habit.done}`);
@@ -213,6 +231,7 @@ router.get('/incrementCounter/:id', async (req,res) => {
         habit.actualCounter = habit.actualCounter + 1;
         if (habit.actualCounter === habit.counterValue) {
             habit.done = true;
+            habit.date = new Date();
         }
         await habit.save();
         res.json({ success: true, message: 'Habit erfolgreich aktualisiert', habit });

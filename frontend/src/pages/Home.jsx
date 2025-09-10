@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { format } from "date-fns";
+import { format, differenceInCalendarDays } from "date-fns";
 import { enGB } from "date-fns/locale";
 import HabitCard from './HabitCard';
 import '../css/Home.css';
@@ -38,6 +38,14 @@ function Home(){
         }else if (selectedView === "calendar") {
             await getCalendar();
         }
+    }
+
+    function toggleHabitDone(id) {
+        setHabits(prev =>
+            prev.map(habit =>
+            habit._id === id ? { ...habit, done: !habit.done } : habit
+            )
+        );
     }
 
     async function handleAddHabit() {
@@ -221,6 +229,49 @@ function Home(){
     loadData();
 }, []);
 
+    useEffect(() => {
+    const updatedHabits = habits.map(habit => {
+        const diff = differenceInCalendarDays(new Date(), new Date(habit.date));
+
+        if (diff === 1 && habit.done) {
+        return {
+            ...habit,
+            streak: habit.streak + 1,
+            done: false,
+            actualCounter: habit.counter ? 0 : habit.actualCounter,
+            date: new Date()
+        };
+        } else if (diff > 1) {
+        return {
+            ...habit,
+            streak: 0,
+            done: false,
+            counterValue: habit.counter ? 0 : habit.counterValue,
+            date: new Date()
+        };
+        }
+        return habit;
+    });
+
+    updateHabit(updatedHabits);
+    }, [habits]);
+
+    async function updateHabit(habits) {
+    const res = await fetch('http://localhost:501/home/updateHabits', {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ habits })
+    });
+    const data = await res.json();
+    if (data.success) {
+        console.log('Habits erfolgreich aktualisiert');
+    } else {
+        console.error('Fehler beim Aktualisieren der Habits:', data.message);
+    }
+    }
 
     useEffect(() => {
         if (message === "Logout erfolgreich"){
@@ -250,8 +301,21 @@ function Home(){
                     </div>
                     <div className="habits-list ubuntu-medium">
                         {habits.map((habit)=>
-                            (<HabitCard key={habit._id} habit={habit} />)
+                            (<HabitCard key={habit._id} habit={habit} onToggleDone={toggleHabitDone}/>)
                         )}
+                    </div>
+                    <div className='summary-container'>
+                        <h2 className='ubuntu-medium summary-maintitle'>Progress Summary</h2>
+                        <div className='summary-sub-container'>
+                            <div className='progress-summary-container'>
+                                <p className='ubuntu-medium summary-title'>Completed Today</p>
+                                <p className='ubuntu-medium summary-maintitle'>{habits.filter(habit => habit.done).length} / {habits.length}</p>
+                            </div>
+                            <div className='progress-summary-streaks'>
+                                <h2 className='ubuntu-medium summary-title'>Total Streaks</h2>
+                                <p className='ubuntu-medium summary-maintitle'>{habits.reduce((sum, habit) => sum + habit.streak, 0)}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -261,7 +325,7 @@ function Home(){
                 <form className="editHabit-form ubuntu-regular" onSubmit={handleAddHabit}>
                         <div className="title-container">
                             <label className="ubuntu-medium edit-input-title">Titel:</label>
-                            <input type="text" className="ubuntu-medium edit-input-field" value={habitName} onChange={(e) => setHabitName(e.target.value)} />
+                            <input type="text" className="ubuntu-medium edit-input-field" value={habitName} placeholder='Enter habit title...' onChange={(e) => setHabitName(e.target.value)} />
                         </div>
                         <div className='frequency-container'>
                             <label className='ubuntu-medium edit-input-title'>Frequency:</label>

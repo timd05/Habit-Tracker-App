@@ -12,11 +12,17 @@
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .background {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
