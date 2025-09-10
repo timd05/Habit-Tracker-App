@@ -7,8 +7,9 @@ The project is split into two parts: a **frontend** and a **backend**, each with
 
 ## Features
 - User sign-up and authentication
-- Create and manage personal habits (TODO)
-- Track daily progress (TODO)
+- Create and manage personal habits
+- Track daily progress
+- Calender overview (TODO)
 - Build consistency over time
 
 ---
