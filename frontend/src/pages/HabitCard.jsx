@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-function HabitCard({habit:initialHabit}){
+function HabitCard({habit:initialHabit, onToggleDone}){
 
     const [message, setMessage] = useState('');
     const [isDeleted, setIsDeleted] = useState(false);
