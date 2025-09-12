@@ -3,7 +3,8 @@ import { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format, differenceInCalendarDays } from "date-fns";
 import { enGB } from "date-fns/locale";
-import HabitCard from './HabitCard';
+import HabitCard from '../components/HabitCard';
+import Calendar from '../components/Calendar';
 import '../css/Home.css';
 
 function Home(){
@@ -299,11 +300,17 @@ function Home(){
                         <button className={`ubuntu-medium view-btn ${selectedView === "weekly" ? "selected" : ''}`} onClick={setWeekly}>Weekly View</button>
                         <button className={`ubuntu-medium view-btn ${selectedView === "calendar" ? "selected" : ''}`} onClick={setCalendar}>Calendar View</button>
                     </div>
-                    <div className="habits-list ubuntu-medium">
+                    {selectedView === "daily" && (<div className="habits-list ubuntu-medium">
                         {habits.map((habit)=>
                             (<HabitCard key={habit._id} habit={habit} onToggleDone={toggleHabitDone}/>)
                         )}
-                    </div>
+                    </div>)}
+                    {selectedView === "weekly" && (<div className="habits-list ubuntu-medium">
+                        {habits.map((habit)=>
+                            (<HabitCard key={habit._id} habit={habit} onToggleDone={toggleHabitDone}/>)
+                        )}
+                    </div>)}
+                    {selectedView === "calendar" && (<Calendar />)}
                     <div className='summary-container'>
                         <h2 className='ubuntu-medium summary-maintitle'>Progress Summary</h2>
                         <div className='summary-sub-container'>

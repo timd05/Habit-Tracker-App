@@ -9,7 +9,7 @@ The project is split into two parts: a **frontend** and a **backend**, each with
 - User sign-up and authentication
 - Create and manage personal habits
 - Track daily progress
-- Calender overview (TODO)
+- Calendar overview
 - Build consistency over time
 
 ---
