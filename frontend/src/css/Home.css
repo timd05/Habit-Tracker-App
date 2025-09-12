@@ -430,3 +430,21 @@
     width: 46%;
     margin: 0.5rem;
 }
+
+.browse-container{
+    visibility: hidden;
+    z-index: 10 !important;
+    border-radius: 1rem;
+    background-color: rgb(14, 16, 28);
+    position: absolute;
+    top: 10%;
+    left: 27%;
+    color: #0b8eb3;
+    padding: 1rem;
+    width: 50%;
+    border: solid 2px #0b8eb3;
+}
+
+.browse-open{
+    visibility: visible;
+}

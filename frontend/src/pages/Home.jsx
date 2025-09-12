@@ -17,6 +17,7 @@ function Home(){
     const [view, setView] = useState('');
     const navigate = useNavigate();
     const [showAddHabitForm, setShowAddHabitForm] = useState(false);
+    const [showBrowseHabits, setShowBrowseHabits] = useState(false);
     const [habitFrequency, setHabitFrequency] = useState('daily');
     const [habitDescription, setHabitDescription] = useState('');
     const [counterForHabit, setCounterForHabit] = useState(false);
@@ -76,6 +77,15 @@ function Home(){
             setShowAddHabitForm(false);
         }else{
             setShowAddHabitForm(true);
+        }
+    }
+
+    function showBrowseHabit(e){
+        e.preventDefault();
+        if (showBrowseHabits === true){
+            setShowBrowseHabits(false);
+        }else{
+            setShowBrowseHabits(true);
         }
     }
 
@@ -293,7 +303,7 @@ function Home(){
                             <input type="text" className='habit-input ubuntu-medium' value={habitName} placeholder='Enter a new habit...' onChange={(e) => setHabitName(e.target.value)}/>
                             <button  type="submit" id="bottone3" className="add-btn ubuntu-medium">+</button>
                         </form>
-                        <button id="bottone3" className="ubuntu-medium" onClick={handleLogout}>Browse</button>
+                        <button id="bottone3" className="ubuntu-medium" onClick={showBrowseHabit}>Browse</button>
                     </div>
                     <div className="view-container">
                         <button className={`ubuntu-medium view-btn ${selectedView === "daily" ? "selected" : ''}`} onClick={setDaily}>Daily View</button>
@@ -324,6 +334,18 @@ function Home(){
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className={`browse-container ubuntu-regular ${showBrowseHabits === true ? "browse-open" : ''}`}>
+                <h2>Habits Recommendations:</h2>
+                <div className='browse-habits-list'>
+                        <ul>
+                            <li>Read a book</li>
+                            <li>Meditate for 10 minutes</li>
+                            <li>Exercise for 30 minutes</li>
+                            <li>Learn a new language</li>
+                            <li>...</li>
+                        </ul>
                 </div>
             </div>
             <div className={`addHabit-container ${showAddHabitForm === true ? "add-open" : ''}`}>
